@@ -10,7 +10,7 @@ resources:
         pullRequestCreate: true
 
 pipelines:
-  - name: robi-mvn-example-tmp
+  - name: robi_mvn_example_tmp
     configuration:
       runtime:
         type: image
@@ -40,7 +40,7 @@ pipelines:
             # Set env
             - export CI=true
             - MVN_PATH=`which mvn` && export M2_HOME=`readlink -f $MVN_PATH | xargs dirname | xargs dirname`
-            - export JFROG_CLI_BUILD_NAME=robi-mvn-example-tmp
+            - export JFROG_CLI_BUILD_NAME=robi_mvn_example_tmp
             - export JFROG_CLI_BUILD_NUMBER=$run_number
 
             # Download JFrog CLI
