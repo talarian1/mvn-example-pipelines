@@ -28,7 +28,7 @@ pipelines:
             - name: robiMvnExampleGit
           integrations:
             - name: ojo
-            - name: robi-eco
+            - name: robi_eco
             - name: robi_github_vcs
         execution:
           onStart:
@@ -47,11 +47,11 @@ pipelines:
             - curl -fL https://getcli.jfrog.io | sh && chmod +x jfrog
 
             # Configure JFrog CLI
-            - ./jfrog rt c robi-eco --url $int_robi-eco_rt_url --user=$int_robi-eco_rt_user --password=$int_robi-eco_rt_password --enc-password=false
+            - ./jfrog rt c robi_eco --url $int_robi_eco_rt_url --user=$int_robi_eco_rt_user --password=$int_robi_eco_rt_password --enc-password=false
             - ./jfrog rt c ojo --url $int_ojo_rt_url --access-token=$int_ojo_rt_token
             - ./jfrog rt mvnc
               --server-id-resolve ojo --repo-resolve-releases jfrog-dependencies --repo-resolve-snapshots jfrog-dependencies
-              --server-id-deploy robi-eco --repo-deploy-releases releases --repo-deploy-snapshots snapshots
+              --server-id-deploy robi_eco --repo-deploy-releases releases --repo-deploy-snapshots snapshots
 
             # Run install and publish
             - >
