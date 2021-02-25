@@ -5,7 +5,7 @@ resources:
     type: GitRepo
     configuration:
       path: RobiNino/mvn-example-pipelines
-      gitProvider: github
+      gitProvider: robi_github_vcs
       buildOn:
         pullRequestCreate: true
 
