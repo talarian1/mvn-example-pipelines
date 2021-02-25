@@ -46,7 +46,7 @@ pipelines:
             - curl -fL https://getcli.jfrog.io | sh && chmod +x jfrog
 
             # Configure JFrog CLI
-            - ./jfrog rt c robi_eco --url $int_robi_eco_rt_url --user=$int_robi_eco_rt_user --password=$int_robi_eco_rt_password --enc-password=false
+            - ./jfrog rt c robi_eco --url $int_robi_eco_url --user=$int_robi_eco_user --apikey=$int_robi_eco_apikey --enc-password=false
             - ./jfrog rt mvnc
               --server-id-resolve robi_eco --repo-resolve-releases libs-release --repo-resolve-snapshots libs-snapshot
               --server-id-deploy robi_eco --repo-deploy-releases libs-release-local --repo-deploy-snapshots libs-snapshot-local
