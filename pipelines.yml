@@ -49,7 +49,7 @@ pipelines:
             - ./jfrog rt mvnc
               --server-id-resolve robi_eco --repo-resolve-releases libs-release --repo-resolve-snapshots libs-snapshot
               --server-id-deploy robi_eco --repo-deploy-releases libs-release-local --repo-deploy-snapshots libs-snapshot-local
-
+            ##
             # Run install and publish
             - >
               env -i PATH=$PATH M2_HOME=$M2_HOME HOME=$HOME
