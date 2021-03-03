@@ -28,7 +28,6 @@ pipelines:
             - name: robiMvnExampleGit
           integrations:
             - name: robi_eco
-            - name: robi_github_vcs
         execution:
           onStart:
             - *UPDATE_COMMIT_STATUS
