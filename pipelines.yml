@@ -14,10 +14,9 @@ pipelines:
     runtime:
       type: image
       image:
-        auto:
-          language: java
-          versions:
-          - 8.0.0
+        custom:
+          name: releases-docker.jfrog.io/jfrog/jfrog-cli-full
+          tag: latest
   steps:
   - name: Build
     type: Bash
