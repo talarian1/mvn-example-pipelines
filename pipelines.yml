@@ -39,6 +39,7 @@ pipelines:
       - ./jfrog rt mvn-config --server-id-resolve rt_RobiNino_mvn_example_pipelines_integration --repo-resolve-releases maven-virtual --repo-resolve-snapshots maven-virtual
       - ./jfrog rt mvn clean install -U -B
       - ./jfrog rt bag
+      - ./jfrog rt bce
       - ./jfrog rt bp
       onSuccess:
       - export JFROG_BUILD_RESULTS=PASS
