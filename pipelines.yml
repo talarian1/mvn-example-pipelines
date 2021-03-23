@@ -1,0 +1,48 @@
+resources:
+- name: RobiNino_mvn_example_pipelines_gitResource
+  type: GitRepo
+  configuration:
+    path: RobiNino/mvn-example-pipelines
+    gitProvider: github_RobiNino_mvn_example_pipelines_integration
+    buildOn:
+      pullRequestCreate: true
+    branches:
+      include: main
+pipelines:
+- name: RobiNino_mvn_example_pipelines_pipeline
+  configuration:
+    runtime:
+      type: image
+      image:
+        auto:
+          language: java
+          versions:
+          - 8.0.0
+  steps:
+  - name: Build
+    type: Bash
+    configuration:
+      inputResources:
+      - name: RobiNino_mvn_example_pipelines_gitResource
+      integrations:
+      - name: rt_RobiNino_mvn_example_pipelines_integration
+    execution:
+      onExecute:
+      - cd $res_RobiNino_mvn_example_pipelines_gitResource_resourcePath
+      - export CI=true
+      - export JFROG_CLI_BUILD_NAME=robi_mvn_example_tmp
+      - export JFROG_CLI_BUILD_NUMBER=$run_number
+      - export JFROG_CLI_BUILD_URL=$step_url
+      - curl -fL https://getcli.jfrog.io | sh && chmod +x jfrog
+      - ./jfrog rt c rt_RobiNino_mvn_example_pipelines_integration --url $int_rt_RobiNino_mvn_example_pipelines_integration_url --user $int_rt_RobiNino_mvn_example_pipelines_integration_user --apikey $int_rt_RobiNino_mvn_example_pipelines_integration_apikey --enc-password=false
+      - MVN_PATH=`which mvn` && export M2_HOME=`readlink -f $MVN_PATH | xargs dirname | xargs dirname`
+      - ./jfrog rt mvn-config --server-id-resolve rt_RobiNino_mvn_example_pipelines_integration --repo-resolve-releases maven-virtual --repo-resolve-snapshots maven-virtual
+      - ./jfrog rt mvn clean install -U -B
+      - ./jfrog rt bag
+      - ./jfrog rt bp
+      onSuccess:
+      - export JFROG_BUILD_RESULTS=PASS
+      - update_commit_status RobiNino_mvn_example_pipelines_gitResource
+      onFailure:
+      - export JFROG_BUILD_RESULTS=FAIL
+      - update_commit_status RobiNino_mvn_example_pipelines_gitResource
