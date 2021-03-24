@@ -48,3 +48,6 @@ pipelines:
       onFailure:
       - export JFROG_BUILD_RESULTS=FAIL
       - update_commit_status RobiNino_mvn_example_pipelines_gitResource
+      onComplete:
+      - export JFROG_BUILD_RESULTS=FAIL
+      - update_commit_status RobiNino_mvn_example_pipelines_gitResource
