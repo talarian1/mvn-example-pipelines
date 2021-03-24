@@ -32,8 +32,8 @@ pipelines:
       - export JFROG_CLI_BUILD_NAME=mvn-example-pipelines-main
       - export JFROG_CLI_BUILD_NUMBER=$run_number
       - export JFROG_CLI_BUILD_URL=$step_url
-      - jfrog c show
-      - jfrog rt c rt_RobiNino_mvn_example_pipelines_integration --artifactory-url
+      - jfrog rt c show
+      - jfrog rt c rt_RobiNino_mvn_example_pipelines_integration --url
         $int_rt_RobiNino_mvn_example_pipelines_integration_url --user $int_rt_RobiNino_mvn_example_pipelines_integration_user
         --apikey $int_rt_RobiNino_mvn_example_pipelines_integration_apikey --enc-password=false
       - MVN_PATH=`which mvn` && export M2_HOME=`readlink -f $MVN_PATH | xargs dirname
