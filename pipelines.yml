@@ -41,13 +41,11 @@ pipelines:
         --repo-resolve-releases maven-virtual --repo-resolve-snapshots maven-virtual
       - jfrog rt mvn clean install
       - jfrog rt bag
-      - jfrog rt bp
-      onComplete:
-      - export JFROG_BUILD_RESULTS=FAIL
-      - update_commit_status RobiNino_mvn_example_pipelines_gitResource
       onSuccess:
       - export JFROG_BUILD_RESULTS=PASS
-      - update_commit_status RobiNino_mvn_example_pipelines_gitResource
       onFailure:
       - export JFROG_BUILD_RESULTS=FAIL
+      onComplete:
+      - jfrog rt bce
+      - jfrog rt bp
       - update_commit_status RobiNino_mvn_example_pipelines_gitResource
