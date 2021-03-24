@@ -42,12 +42,12 @@ pipelines:
       - jfrog rt mvn clean install
       - jfrog rt bag
       - jfrog rt bp
+      onComplete:
+      - export JFROG_BUILD_RESULTS=FAIL
+      - update_commit_status RobiNino_mvn_example_pipelines_gitResource
       onSuccess:
       - export JFROG_BUILD_RESULTS=PASS
       - update_commit_status RobiNino_mvn_example_pipelines_gitResource
       onFailure:
-      - export JFROG_BUILD_RESULTS=FAIL
-      - update_commit_status RobiNino_mvn_example_pipelines_gitResource
-      onComplete:
       - export JFROG_BUILD_RESULTS=FAIL
       - update_commit_status RobiNino_mvn_example_pipelines_gitResource
