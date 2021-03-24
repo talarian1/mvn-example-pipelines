@@ -46,6 +46,5 @@ pipelines:
       onFailure:
       - export JFROG_BUILD_RESULTS=FAIL
       onComplete:
-      - jfrog rt bce
       - jfrog rt bp
       - update_commit_status RobiNino_mvn_example_pipelines_gitResource
