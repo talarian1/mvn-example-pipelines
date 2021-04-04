@@ -29,7 +29,7 @@ pipelines:
       onExecute:
       - cd $res_RobiNino_mvn_example_pipelines_gitResource_resourcePath
       - export CI=true
-      - export JFROG_CLI_BUILD_NAME=robi_mvn_example_tmp
+      - export JFROG_CLI_BUILD_NAME=mvn-example-pipelines-main
       - export JFROG_CLI_BUILD_NUMBER=$run_number
       - export JFROG_CLI_BUILD_URL=$step_url
       - export JFROG_BUILD_RESULTS=PASS
@@ -40,7 +40,7 @@ pipelines:
         | xargs dirname`
       - jfrog rt mvn-config --server-id-resolve RobiNino_mvn_example_pipelines_serverId
         --repo-resolve-releases maven-virtual --repo-resolve-snapshots maven-virtual
-      - jfrog rt mvn clean install -U -B
+      - jfrog rt mvn clean install
       - jfrog rt bag
       - jfrog rt bce
       - jfrog rt bp
