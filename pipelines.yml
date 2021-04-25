@@ -27,8 +27,8 @@ pipelines:
           #inherits from bash
           mvnCommand:           clean install
           #sourceLocation:       <string>      # optional
-          resolverSnapshotRepo: maven-virtuall      # optional
-          resolverReleaseRepo:  maven-virtuall      # optional
+          resolverSnapshotRepo: maven-virtual      # optional
+          resolverReleaseRepo:  maven-virtual      # optional
           #deployerSnapshotRepo: <string>      # optional
           #deployerReleaseRepo:  <string>      # optional
           #forceXrayScan:        <string>      # optional
