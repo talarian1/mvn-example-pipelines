@@ -18,7 +18,7 @@ resources:
 pipelines:
   - name: RobiNino_mvn_example_pipelines_pipeline
     steps:
-      - name: Build
+      - name: MvnBuild
         type: MvnBuild
         configuration:
           environmentVariables:
@@ -27,13 +27,13 @@ pipelines:
           #inherits from bash
           mvnCommand:           clean install
           #sourceLocation:       <string>      # optional
-          resolverSnapshotRepo: maven-virtuall      # optional
-          resolverReleaseRepo:  maven-virtuall      # optional
+          resolverSnapshotRepo: maven-virtual      # optional
+          resolverReleaseRepo:  maven-virtual      # optional
           #deployerSnapshotRepo: <string>      # optional
           #deployerReleaseRepo:  <string>      # optional
           #forceXrayScan:        <string>      # optional
           #failOnScan:           <boolean>     # default true
-          autoPublishBuildInfo: true      # optional
+          #autoPublishBuildInfo: true      # optional
           #configFileLocation:   <string>      # optional
           #configFileName:       <string>      # optional
  
@@ -42,8 +42,8 @@ pipelines:
           inputResources:
             - name:         RobiNino_mvn_example_pipelines_gitResource         # required
             #- name:         <FileSpec resource>        # optional
-          outputResources:
-            - name:         RobiNino_mvn_example_pipelines_pipeline_bi       # if autoPublishBuildInfo is true
+          #outputResources:
+          #  - name:         RobiNino_mvn_example_pipelines_pipeline_bi       # if autoPublishBuildInfo is true
  
         execution:
           onStart:
@@ -53,6 +53,32 @@ pipelines:
           onFailure:
             - echo "uh oh, something went wrong"
           onComplete:                                  #always
+            - echo "Cleaning up some stuff"
+  - name:   <string>
+    steps:
+      - name: PublishBuildInfo
+        type: PublishBuildInfo
+        configuration:
+          #inherits from bash
+          #envInclude:       <string>  
+          #envExclude:       <string>  
+          #forceXrayScan:    <boolean>    # default false
+          #failOnScan:       <boolean>    # default true
+ 
+          inputSteps:
+            - name:         MvnBuild  # required
+          outputResources:
+            - name:         RobiNino_mvn_example_pipelines_pipeline_bi                     # required
+ 
+ 
+        execution:
+          onStart:
+            - echo "Preparing for work..."
+          onSuccess:
+            - echo "Job well done!"
+          onFailure:
+            - echo "uh oh, something went wrong"
+          onComplete: #always
             - echo "Cleaning up some stuff"
 
 #- name: RobiNino_mvn_example_pipelines_pipeline
