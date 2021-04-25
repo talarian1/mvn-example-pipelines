@@ -36,6 +36,8 @@ pipelines:
            # - name:         <BuildInfo resource>       # if autoPublishBuildInfo is true
  
         execution:
+          - export JFROG_CLI_BUILD_URL=$step_url
+          - export JFROG_BUILD_STATUS=PASS
           onStart:
             - echo "Preparing for work..."
           onSuccess:
@@ -68,7 +70,7 @@ pipelines:
 #      - export JFROG_CLI_BUILD_NAME=mvn-example-pipelines-main
 #      - export JFROG_CLI_BUILD_NUMBER=$run_number
 #      - export JFROG_CLI_BUILD_URL=$step_url
-#      - export JFROG_BUILD_RESULTS=PASS
+#      - export JFROG_BUILD_STATUS=PASS
 #      - jfrog c add RobiNino_mvn_example_pipelines_serverId --artifactory-url $int_rt_RobiNino_mvn_example_pipelines_integration_url
 #        --user $int_rt_RobiNino_mvn_example_pipelines_integration_user --apikey $int_rt_RobiNino_mvn_example_pipelines_integration_apikey
 #        --enc-password=false
@@ -83,7 +85,7 @@ pipelines:
 #      onComplete:
 #      - update_commit_status RobiNino_mvn_example_pipelines_gitResource
 #      onFailure:
-#      - export JFROG_BUILD_RESULTS=FAIL
+#      - export JFROG_BUILD_STATUS=FAIL
 #      - jfrog rt bce
 #      - jfrog rt bp
       
