@@ -49,11 +49,12 @@ pipelines:
           onStart:
             - echo "Preparing for work..."
           onSuccess:
-            - echo "Job well done!"
+            - jfrog rt bag
           onFailure:
             - echo "uh oh, something went wrong"
             - export JFROG_BUILD_STATUS=FAIL
             - jfrog rt bce
+            - jfrog rt bag
             - jfrog rt bp
           onComplete:                                  #always
             - echo "Cleaning up some stuff"
