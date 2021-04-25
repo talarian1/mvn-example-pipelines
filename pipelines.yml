@@ -8,14 +8,13 @@ resources:
       pullRequestCreate: true
     branches:
       include: main
-resources:
-  - name:       RobiNino_mvn_example_pipelines_pipeline-bi
-    type: BuildInfo
-    configuration:
-      sourceArtifactory:    rt_RobiNino_mvn_example_pipelines_integration
-      #buildName:            <string>
-      #buildNumber:          <number>
-      #externalCI:           jenkinsIntegration
+- name:       RobiNino_mvn_example_pipelines_pipeline-bi
+  type: BuildInfo
+  configuration:
+    sourceArtifactory:    rt_RobiNino_mvn_example_pipelines_integration
+    #buildName:            <string>
+    #buildNumber:          <number>
+    #externalCI:           jenkinsIntegration
 pipelines:
   - name: RobiNino_mvn_example_pipelines_pipeline
     steps:
