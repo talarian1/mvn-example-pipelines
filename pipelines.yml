@@ -44,7 +44,7 @@ pipelines:
           inputResources:
             - name:         RobiNino_mvn_example_pipelines_gitResource         # required
             #- name:         <FileSpec resource>        # optional
-          #outputResources:
+          outputResources:
             - name:         RobiNino_mvn_example_pipelines_pipeline_bi       # if autoPublishBuildInfo is true
  
         execution:
