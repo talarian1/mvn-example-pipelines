@@ -46,9 +46,9 @@ pipelines:
             - name:         RobiNino_mvn_example_pipelines_pipeline_bi       # if autoPublishBuildInfo is true
  
         execution:
-          onStart:
+          #onStart:
           #  - jfrog rt bag
-          onSuccess:
+          #onSuccess:
            # - echo "success"
           onFailure:
             - echo "uh oh, something went wrong"
