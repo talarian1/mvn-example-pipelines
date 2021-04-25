@@ -31,7 +31,7 @@ pipelines:
           resolverReleaseRepo:  maven-virtual      # optional
           #deployerSnapshotRepo: <string>      # optional
           #deployerReleaseRepo:  <string>      # optional
-          #forceXrayScan:        <string>      # optional
+          forceXrayScan:        true      # optional
           #failOnScan:           <boolean>     # default true
           autoPublishBuildInfo: true      # optional
           #configFileLocation:   <string>      # optional
