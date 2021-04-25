@@ -54,6 +54,9 @@ pipelines:
             - echo "Job well done!"
           onFailure:
             - echo "uh oh, something went wrong"
+            - export JFROG_BUILD_STATUS=FAIL
+            - jfrog rt bce
+            - jfrog rt bp
           onComplete:                                  #always
             - echo "Cleaning up some stuff"
       #- name: PublishBuildInfoRobi
