@@ -16,8 +16,8 @@ pipelines:
         configuration:
           environmentVariables:
             readOnly:
-              JFROG_CLI_BUILD_URL: $step_url
-              JFROG_BUILD_STATUS: PASS
+              JFROG_CLI_BUILD_URL:$step_url
+              JFROG_BUILD_STATUS:'PASS'
           #inherits from bash
           mvnCommand:           clean install
           #sourceLocation:       <string>      # optional
