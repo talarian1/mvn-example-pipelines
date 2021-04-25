@@ -14,6 +14,10 @@ pipelines:
       - name: Build
         type: MvnBuild
         configuration:
+          environmentVariables:
+            readOnly:
+              JFROG_CLI_BUILD_URL: $step_url
+              JFROG_BUILD_STATUS: PASS
           #inherits from bash
           mvnCommand:           clean install
           #sourceLocation:       <string>      # optional
@@ -36,9 +40,6 @@ pipelines:
            # - name:         <BuildInfo resource>       # if autoPublishBuildInfo is true
  
         execution:
-          onExecute:
-          - export JFROG_CLI_BUILD_URL=$step_url
-          - export JFROG_BUILD_STATUS=PASS
           onStart:
             - echo "Preparing for work..."
           onSuccess:
