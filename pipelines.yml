@@ -47,9 +47,9 @@ pipelines:
  
         execution:
           onStart:
-            - jfrog rt bag
+          #  - jfrog rt bag
           onSuccess:
-            - echo "success"
+           # - echo "success"
           onFailure:
             - echo "uh oh, something went wrong"
             - export JFROG_BUILD_STATUS=FAIL
