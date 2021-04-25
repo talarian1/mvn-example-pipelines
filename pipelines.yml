@@ -17,13 +17,15 @@ resources:
     #externalCI:           jenkinsIntegration
 pipelines:
   - name: RobiNino_mvn_example_pipelines_pipeline
+    configuration:
+      environmentVariables:
+        readOnly:
+          'JFROG_CLI_BUILD_URL': $step_url
+          'JFROG_BUILD_STATUS': 'PASS'
     steps:
       - name: MvnBuildRobi
         type: MvnBuild
         configuration:
-          environmentVariables:
-            'JFROG_CLI_BUILD_URL': $step_url
-            'JFROG_BUILD_STATUS': 'PASS'
           #inherits from bash
           mvnCommand:           clean install
           #sourceLocation:       <string>      # optional
