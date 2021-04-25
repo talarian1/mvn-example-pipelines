@@ -16,8 +16,8 @@ pipelines:
         configuration:
           environmentVariables:
             readOnly:
-              JFROG_CLI_BUILD_URL:$step_url
-              JFROG_BUILD_STATUS:'PASS'
+              JFROG_CLI_BUILD_URL: $step_url
+              JFROG_BUILD_STATUS: 'PASS'
           #inherits from bash
           mvnCommand:           clean install
           #sourceLocation:       <string>      # optional
@@ -27,7 +27,7 @@ pipelines:
           #deployerReleaseRepo:  <string>      # optional
           #forceXrayScan:        <string>      # optional
           #failOnScan:           <boolean>     # default true
-          #autoPublishBuildInfo: <string>      # optional
+          autoPublishBuildInfo: <string>      # optional
           #configFileLocation:   <string>      # optional
           #configFileName:       <string>      # optional
  
