@@ -8,7 +8,7 @@ resources:
       pullRequestCreate: true
     branches:
       include: main
-- name:       RobiNino_mvn_example_pipelines_pipeline-bi
+- name:       RobiNino_mvn_example_pipelines_pipeline_bi
   type: BuildInfo
   configuration:
     sourceArtifactory:    rt_RobiNino_mvn_example_pipelines_integration
