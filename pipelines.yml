@@ -35,7 +35,7 @@ pipelines:
           #deployerReleaseRepo:  <string>      # optional
           #forceXrayScan:        <string>      # optional
           #failOnScan:           <boolean>     # default true
-          #autoPublishBuildInfo: true      # optional
+          autoPublishBuildInfo: true      # optional
           #configFileLocation:   <string>      # optional
           #configFileName:       <string>      # optional
  
@@ -56,30 +56,30 @@ pipelines:
             - echo "uh oh, something went wrong"
           onComplete:                                  #always
             - echo "Cleaning up some stuff"
-      - name: PublishBuildInfoRobi
-        type: PublishBuildInfo
-        configuration:
-          #inherits from bash
-          #envInclude:       <string>  
-          #envExclude:       <string>  
-          #forceXrayScan:    <boolean>    # default false
-          #failOnScan:       <boolean>    # default true
- 
-          inputSteps:
-            - name:         MvnBuildRobi  # required
-          outputResources:
-            - name:         RobiNino_mvn_example_pipelines_pipeline_bi                     # required
- 
- 
-        execution:
-          onStart:
-            - echo "Preparing for work..."
-          onSuccess:
-            - echo "Job well done!"
-          onFailure:
-            - echo "uh oh, something went wrong"
-          onComplete: #always
-            - echo "Cleaning up some stuff"
+      #- name: PublishBuildInfoRobi
+      #  type: PublishBuildInfo
+      #  configuration:
+      #    #inherits from bash
+      #    #envInclude:       <string>  
+      #    #envExclude:       <string>  
+      #    #forceXrayScan:    <boolean>    # default false
+      #    #failOnScan:       <boolean>    # default true
+ #
+      #    inputSteps:
+      #      - name:         MvnBuildRobi  # required
+      #    outputResources:
+      #      - name:         RobiNino_mvn_example_pipelines_pipeline_bi                     # required
+ #
+ #
+      #  execution:
+      #    onStart:
+      #      - echo "Preparing for work..."
+      #    onSuccess:
+      #      - echo "Job well done!"
+      #    onFailure:
+      #      - echo "uh oh, something went wrong"
+      #    onComplete: #always
+      #      - echo "Cleaning up some stuff"
 
 #- name: RobiNino_mvn_example_pipelines_pipeline
 #  configuration:
