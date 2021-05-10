@@ -67,6 +67,6 @@ pipelines:
           forceXrayScan: true
           #failOnScan:       <boolean>    # default true
           inputSteps:
-            - name:         RobiNino_mvn_example_pipelines_pipeline  # required
+            - name:         MvnBuildRobi  # required
           outputResources:
             - name:         RobiNino_mvn_example_pipelines_pipeline_bi
