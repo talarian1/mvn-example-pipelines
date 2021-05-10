@@ -31,9 +31,9 @@ pipelines:
           resolverReleaseRepo:  maven-virtual      # optional
           #deployerSnapshotRepo: <string>      # optional
           #deployerReleaseRepo:  <string>      # optional
-          forceXrayScan:        true      # optional
+          forceXrayScan:        false      # optional
           #failOnScan:           <boolean>     # default true
-          autoPublishBuildInfo: true      # optional
+          autoPublishBuildInfo: false      # optional
           #configFileLocation:   <string>      # optional
           #configFileName:       <string>      # optional
  
@@ -58,70 +58,15 @@ pipelines:
             - jfrog rt bp
           onComplete:                                  #always
             - echo "Cleaning up some stuff"
-      #- name: PublishBuildInfoRobi
-      #  type: PublishBuildInfo
-      #  configuration:
-      #    #inherits from bash
-      #    #envInclude:       <string>  
-      #    #envExclude:       <string>  
-      #    #forceXrayScan:    <boolean>    # default false
-      #    #failOnScan:       <boolean>    # default true
- #
-      #    inputSteps:
-      #      - name:         MvnBuildRobi  # required
-      #    outputResources:
-      #      - name:         RobiNino_mvn_example_pipelines_pipeline_bi                     # required
- #
- #
-      #  execution:
-      #    onStart:
-      #      - echo "Preparing for work..."
-      #    onSuccess:
-      #      - echo "Job well done!"
-      #    onFailure:
-      #      - echo "uh oh, something went wrong"
-      #    onComplete: #always
-      #      - echo "Cleaning up some stuff"
-
-#- name: RobiNino_mvn_example_pipelines_pipeline
-#  configuration:
-#    runtime:
-#      type: image
-#      image:
-#        custom:
-#          name: releases-docker.jfrog.io/jfrog/jfrog-cli-full
-#          tag: latest
-#  steps:
-#  - name: Build
-#    type: Bash
-#    configuration:
-#      inputResources:
-#      - name: RobiNino_mvn_example_pipelines_gitResource
-#      integrations:
-#      - name: rt_RobiNino_mvn_example_pipelines_integration
-#    execution:
-#      onExecute:
-#      - cd $res_RobiNino_mvn_example_pipelines_gitResource_resourcePath
-#      - export CI=true
-#      - export JFROG_CLI_BUILD_NAME=mvn-example-pipelines-main
-#      - export JFROG_CLI_BUILD_NUMBER=$run_number
-#      - export JFROG_CLI_BUILD_URL=$step_url
-#      - export JFROG_BUILD_STATUS=PASS
-#      - jfrog c add RobiNino_mvn_example_pipelines_serverId --artifactory-url $int_rt_RobiNino_mvn_example_pipelines_integration_url
-#        --user $int_rt_RobiNino_mvn_example_pipelines_integration_user --apikey $int_rt_RobiNino_mvn_example_pipelines_integration_apikey
-#        --enc-password=false
-#      - MVN_PATH=`which mvn` && export M2_HOME=`readlink -f $MVN_PATH | xargs dirname
-#        | xargs dirname`
-#      - jfrog rt mvn-config --server-id-resolve RobiNino_mvn_example_pipelines_serverId
-#        --repo-resolve-releases maven-virtual --repo-resolve-snapshots maven-virtual
-#      - jfrog rt mvn clean install
-#      - jfrog rt bag
-#      - jfrog rt bce
-#      - jfrog rt bp
-#      onComplete:
-#      - update_commit_status RobiNino_mvn_example_pipelines_gitResource
-#      onFailure:
-#      - export JFROG_BUILD_STATUS=FAIL
-#      - jfrog rt bce
-#      - jfrog rt bp
-      
+      - name: PublishBuildInfoRobi
+        type: PublishBuildInfo
+        configuration:
+          #inherits from bash
+          #envInclude:       <string>  
+          #envExclude:       <string>  
+          forceXrayScan: true
+          #failOnScan:       <boolean>    # default true
+          inputSteps:
+            - name:         RobiNino_mvn_example_pipelines_pipeline  # required
+          outputResources:
+            - name:         RobiNino_mvn_example_pipelines_pipeline_bi
