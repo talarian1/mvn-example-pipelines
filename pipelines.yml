@@ -31,9 +31,9 @@ pipelines:
           resolverReleaseRepo:  maven-virtual      # optional
           #deployerSnapshotRepo: <string>      # optional
           #deployerReleaseRepo:  <string>      # optional
-          forceXrayScan:        true      # optional
+          forceXrayScan:        false      # optional
           #failOnScan:           <boolean>     # default true
-          autoPublishBuildInfo: true      # optional
+          autoPublishBuildInfo: false      # optional
           #configFileLocation:   <string>      # optional
           #configFileName:       <string>      # optional
  
@@ -55,7 +55,7 @@ pipelines:
             - export JFROG_BUILD_STATUS=FAIL
             - jfrog rt bce
             - jfrog rt bag
-            - jfrog rt bp
+            #- jfrog rt bp
           onComplete:                                  #always
             - echo "Cleaning up some stuff"
       - name: PublishBuildInfoRobi
@@ -70,3 +70,6 @@ pipelines:
             - name:         MvnBuildRobi  # required
           outputResources:
             - name:         RobiNino_mvn_example_pipelines_pipeline_bi
+
+
+
