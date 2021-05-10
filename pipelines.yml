@@ -3,7 +3,7 @@ resources:
   type: GitRepo
   configuration:
     path: RobiNino/mvn-example-pipelines
-    gitProvider: github_RobiNino_mvn_example_pipelines_integration
+    gitProvider: github_robi
     buildOn:
       pullRequestCreate: true
     branches:
@@ -11,7 +11,7 @@ resources:
 - name:       RobiNino_mvn_example_pipelines_pipeline_bi
   type: BuildInfo
   configuration:
-    sourceArtifactory:    rt_RobiNino_mvn_example_pipelines_integration
+    sourceArtifactory:    robindev
     #buildName:            <string>
     #buildNumber:          <number>
     #externalCI:           jenkinsIntegration
@@ -31,14 +31,14 @@ pipelines:
           resolverReleaseRepo:  maven-virtual      # optional
           #deployerSnapshotRepo: <string>      # optional
           #deployerReleaseRepo:  <string>      # optional
-          forceXrayScan:        false      # optional
+          forceXrayScan:        true      # optional
           #failOnScan:           <boolean>     # default true
-          autoPublishBuildInfo: false      # optional
+          autoPublishBuildInfo: true      # optional
           #configFileLocation:   <string>      # optional
           #configFileName:       <string>      # optional
  
           integrations:
-            - name:         rt_RobiNino_mvn_example_pipelines_integration  # required
+            - name:         robindev  # required
           inputResources:
             - name:         RobiNino_mvn_example_pipelines_gitResource         # required
             #- name:         <FileSpec resource>        # optional
