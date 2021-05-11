@@ -8,68 +8,34 @@ resources:
       pullRequestCreate: true
     branches:
       include: main
-- name:       RobiNino_mvn_example_pipelines_pipeline_bi
+- name: RobiNino_mvn_example_pipelines_buildInfoResource
   type: BuildInfo
   configuration:
-    sourceArtifactory:    robindev
-    #buildName:            <string>
-    #buildNumber:          <number>
-    #externalCI:           jenkinsIntegration
+    sourceArtifactory: robindev
+    buildName: $pipeline_name
+    buildNumber: $run_number
 pipelines:
-  - name: RobiNino_mvn_example_pipelines_pipeline
-    steps:
-      - name: MvnBuildRobi
-        type: MvnBuild
-        configuration:
-          environmentVariables:
-            'JFROG_CLI_BUILD_URL': $step_url
-            'JFROG_BUILD_STATUS': 'PASS'
-          #inherits from bash
-          mvnCommand:           clean install
-          #sourceLocation:       <string>      # optional
-          resolverSnapshotRepo: maven-virtual      # optional
-          resolverReleaseRepo:  maven-virtual      # optional
-          #deployerSnapshotRepo: <string>      # optional
-          #deployerReleaseRepo:  <string>      # optional
-          forceXrayScan:        false      # optional
-          #failOnScan:           <boolean>     # default true
-          autoPublishBuildInfo: false      # optional
-          #configFileLocation:   <string>      # optional
-          #configFileName:       <string>      # optional
- 
-          integrations:
-            - name:         robindev  # required
-          inputResources:
-            - name:         RobiNino_mvn_example_pipelines_gitResource         # required
-            #- name:         <FileSpec resource>        # optional
-          outputResources:
-            - name:         RobiNino_mvn_example_pipelines_pipeline_bi       # if autoPublishBuildInfo is true
- 
-        execution:
-          #onStart:
-          #  - jfrog rt bag
-          #onSuccess:
-           # - echo "success"
-          onFailure:
-            - echo "uh oh, something went wrong"
-            - export JFROG_BUILD_STATUS=FAIL
-            - jfrog rt bce
-            - jfrog rt bag
-            #- jfrog rt bp
-          onComplete:                                  #always
-            - echo "Cleaning up some stuff"
-      - name: PublishBuildInfoRobi
-        type: PublishBuildInfo
-        configuration:
-          #inherits from bash
-          #envInclude:       <string>  
-          #envExclude:       <string>  
-          forceXrayScan: true
-          #failOnScan:       <boolean>    # default true
-          inputSteps:
-            - name:         MvnBuildRobi  # required
-          outputResources:
-            - name:         RobiNino_mvn_example_pipelines_pipeline_bi
-
-
-
+- name: RobiNino_mvn_example_pipelines_pipeline
+  steps:
+  - name: MvnBuildStep
+    type: MvnBuild
+    configuration:
+      environmentVariables:
+        JFROG_BUILD_STATUS: PASS
+        JFROG_CLI_BUILD_URL: $step_url
+      integrations:
+      - name: robindev
+      inputResources:
+      - name: RobiNino_mvn_example_pipelines_gitResource
+      outputResources:
+      - name: RobiNino_mvn_example_pipelines_buildInfoResource
+      mvnCommand: mvn clean install
+      resolverSnapshotRepo: maven-virtual
+      resolverReleaseRepo: maven-virtual
+    execution:
+      onComplete:
+      - update_commit_status RobiNino_mvn_example_pipelines_gitResource
+      onFailure:
+      - export JFROG_BUILD_STATUS=FAIL
+      - jfrog rt bce
+      - jfrog rt bp
