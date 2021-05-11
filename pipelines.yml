@@ -39,3 +39,11 @@ pipelines:
       - export JFROG_BUILD_STATUS=FAIL
       - jfrog rt bce
       - jfrog rt bp
+  - name: PublishBuildInfoRobi
+    type: PublishBuildInfo
+    configuration:
+      forceXrayScan: true
+      inputSteps:
+        - name:         MvnBuildStep
+      outputResources:
+        - name:         RobiNino_mvn_example_pipelines_buildInfoResource
