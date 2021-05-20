@@ -21,7 +21,7 @@ jobs:
        run: |
          # Init JFrog CLI build tools config
          MVN_PATH='which mvn' && export M2_HOME='readlink -f $MVN_PATH | xargs dirname | xargs dirname' && \
-jfrog rt mvn-config --server-id-resolve ci-setup-cmd --repo-resolve-releases test2v --repo-resolve-snapshots test2v
+         jfrog rt mvn-config --server-id-resolve ci-setup-cmd --repo-resolve-releases test2v --repo-resolve-snapshots test2v
          # Build the project using JFrog CLI
          jfrog rt mvn clean install
      - name: Failure check
